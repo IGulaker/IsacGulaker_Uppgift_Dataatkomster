@@ -47,6 +47,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Migrations
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductEAN_13 = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     ProductPrice = table.Column<decimal>(type: "money", nullable: false),
+                    ProductQuantity = table.Column<short>(type: "smallint", nullable: false),
                     CustomerFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),

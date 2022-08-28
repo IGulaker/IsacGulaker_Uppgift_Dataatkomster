@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IsacGulaker_Uppgift_Dataatkomster.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220828211538_init")]
+    [Migration("20220828220501_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -136,6 +136,9 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Migrations
 
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("money");
+
+                    b.Property<short>("ProductQuantity")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("ResidenceNumber")
                         .HasColumnType("nvarchar(max)");

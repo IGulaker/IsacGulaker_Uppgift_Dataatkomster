@@ -20,6 +20,10 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Data.Entities
         public decimal ProductPrice { get; set; }
 
         [Required]
+        [Column(TypeName ="smallint")]
+        public int ProductQuantity { get; set; }
+
+        [Required]
         public string CustomerFirstName { get; set; } = null!;
 
         [Required]
