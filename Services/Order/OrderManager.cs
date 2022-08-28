@@ -19,18 +19,12 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Order
 
         public async Task<IActionResult> CreateOrderAsync(CreateOrderModel model)
         {
-            OrderEntity orderEntity = await GetOrderAsync(model);
-            if (orderEntity == null)
-            {
-                orderEntity = _mapper.Map<OrderEntity>(model);
+                OrderEntity orderEntity = _mapper.Map<OrderEntity>(model);
 
-                await _context.Addresses.AddAsync(orderEntity);
+                await _context.Orders.AddAsync(orderEntity);
                 await _context.SaveChangesAsync();
 
-                return new OkObjectResult("An address has been created");
-            }
-
-            return new ConflictObjectResult("Address already exists");
+                return new OkObjectResult("An order has been created");
         }
 
         public async Task<IActionResult> ReadOrderAsync(int id)
@@ -49,11 +43,6 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Order
         }
 
         public async Task<OrderEntity> GetOrderAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<OrderEntity> GetOrderAsync(CreateOrderModel model)
         {
             throw new NotImplementedException();
         }

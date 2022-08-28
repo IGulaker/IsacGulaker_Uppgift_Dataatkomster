@@ -13,6 +13,5 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Order
         public Task<IActionResult> DeleteOrderAsync(int id);
 
         public Task<OrderEntity> GetOrderAsync(int id);
-        public Task<OrderEntity> GetOrderAsync(CreateOrderModel model);
     }
 }
