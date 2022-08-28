@@ -54,6 +54,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster
             CreateMap<ManufacturerEntity, RequestManufacturerModel>();
 
             CreateMap<CreateOrderModel, OrderEntity>();
+            CreateMap<OrderEntity, RequestOrderModel>();
         }
     }
 }

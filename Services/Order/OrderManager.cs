@@ -2,6 +2,8 @@
 using IsacGulaker_Uppgift_Dataatkomster.Data;
 using IsacGulaker_Uppgift_Dataatkomster.Data.Entities;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Order;
+using IsacGulaker_Uppgift_Dataatkomster.Services.Product;
+using IsacGulaker_Uppgift_Dataatkomster.Services.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,17 +12,24 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Order
     public class OrderManager : IOrderManager
     {
         private readonly DataContext _context;
+        private readonly IUserManager _userManager;
+        private readonly IProductManager _productManager;
         private readonly IMapper _mapper;
 
-        public OrderManager(DataContext context, IMapper mapper)
+        public OrderManager(DataContext context, IUserManager userManager, IProductManager productManager, IMapper mapper)
         {
             _context = context;
-            this._mapper = mapper;
+            _userManager = userManager;
+            _productManager = productManager;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> CreateOrderAsync(CreateOrderModel model)
         {
                 OrderEntity orderEntity = _mapper.Map<OrderEntity>(model);
+
+                //EXTRALOGICFORFRONTEND
+
 
                 await _context.Orders.AddAsync(orderEntity);
                 await _context.SaveChangesAsync();

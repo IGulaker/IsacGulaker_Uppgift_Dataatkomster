@@ -135,8 +135,8 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Migrations
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("money");
 
-                    b.Property<short>("ProductQuantity")
-                        .HasColumnType("smallint");
+                    b.Property<int>("ProductQuantity")
+                        .HasColumnType("int");
 
                     b.Property<string>("ResidenceNumber")
                         .HasColumnType("nvarchar(max)");

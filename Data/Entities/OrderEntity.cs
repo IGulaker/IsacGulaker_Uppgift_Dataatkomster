@@ -20,7 +20,6 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Data.Entities
         public decimal ProductPrice { get; set; }
 
         [Required]
-        [Column(TypeName ="smallint")]
         public int ProductQuantity { get; set; }
 
         [Required]
@@ -52,7 +51,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Data.Entities
         {
             OrderDate = DateTime.Now;
             DueDate = DateTime.Now.AddDays(14);
-            OrderStatus = "Need to be packaged";
+            OrderStatus = "Needs to be packaged";
         }
     }
 }
