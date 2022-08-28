@@ -3,6 +3,7 @@ using IsacGulaker_Uppgift_Dataatkomster.Data.Entities;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Address;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Category;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Manufacturer;
+using IsacGulaker_Uppgift_Dataatkomster.Models.Order;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Product;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Subcategory;
 using IsacGulaker_Uppgift_Dataatkomster.Models.User;
@@ -51,6 +52,8 @@ namespace IsacGulaker_Uppgift_Dataatkomster
                 .ForMember(dest => dest.Name, act => act.MapFrom(src => src.NewManufacturerName))
                 .ForMember(dest => dest.Address, act => act.MapFrom(src => src.NewManufacturerAddress));
             CreateMap<ManufacturerEntity, RequestManufacturerModel>();
+
+            CreateMap<CreateOrderModel, OrderEntity>();
         }
     }
 }

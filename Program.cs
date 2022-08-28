@@ -1,5 +1,6 @@
 using IsacGulaker_Uppgift_Dataatkomster.Data;
 using IsacGulaker_Uppgift_Dataatkomster.Services.Address;
+using IsacGulaker_Uppgift_Dataatkomster.Services.Order;
 using IsacGulaker_Uppgift_Dataatkomster.Services.Product;
 using IsacGulaker_Uppgift_Dataatkomster.Services.User;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserManager, UserManager>();
 builder.Services.AddScoped<IAddressManager, AddressManager>();
 builder.Services.AddScoped<IProductManager, ProductManager>();
+builder.Services.AddScoped<IOrderManager, OrderManager>();
 
 var app = builder.Build();
 
