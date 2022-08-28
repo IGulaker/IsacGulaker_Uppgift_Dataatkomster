@@ -12,24 +12,17 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Order
     public class OrderManager : IOrderManager
     {
         private readonly DataContext _context;
-        private readonly IUserManager _userManager;
-        private readonly IProductManager _productManager;
         private readonly IMapper _mapper;
 
-        public OrderManager(DataContext context, IUserManager userManager, IProductManager productManager, IMapper mapper)
+        public OrderManager(DataContext context, IMapper mapper)
         {
             _context = context;
-            _userManager = userManager;
-            _productManager = productManager;
             _mapper = mapper;
         }
 
         public async Task<IActionResult> CreateOrderAsync(CreateOrderModel model)
         {
                 OrderEntity orderEntity = _mapper.Map<OrderEntity>(model);
-
-                //EXTRALOGICFORFRONTEND
-
 
                 await _context.Orders.AddAsync(orderEntity);
                 await _context.SaveChangesAsync();
