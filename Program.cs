@@ -1,5 +1,6 @@
 using IsacGulaker_Uppgift_Dataatkomster.Data;
 using IsacGulaker_Uppgift_Dataatkomster.Services.Address;
+using IsacGulaker_Uppgift_Dataatkomster.Services.Product;
 using IsacGulaker_Uppgift_Dataatkomster.Services.User;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(databaseConnectio
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserManager, UserManager>();
 builder.Services.AddScoped<IAddressManager, AddressManager>();
+builder.Services.AddScoped<IProductManager, ProductManager>();
 
 var app = builder.Build();
 

@@ -10,13 +10,11 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Product
     public class ProductManager : IProductManager
     {
         private readonly DataContext _context;
-        private readonly IProductManager _productManager;
         private readonly IMapper _mapper;
 
-        public ProductManager(DataContext context, IProductManager productManager, IMapper mapper)
+        public ProductManager(DataContext context, IMapper mapper)
         {
             _context = context;
-            _productManager = productManager;
             _mapper = mapper;
         }
 

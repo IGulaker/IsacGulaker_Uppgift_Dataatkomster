@@ -2,6 +2,7 @@
 using IsacGulaker_Uppgift_Dataatkomster.Data.Entities;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Address;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Category;
+using IsacGulaker_Uppgift_Dataatkomster.Models.Manufacturer;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Product;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Subcategory;
 using IsacGulaker_Uppgift_Dataatkomster.Models.User;
@@ -35,6 +36,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster
                 .ForMember(dest => dest.Price, act => act.MapFrom(src => src.NewProductPrice))
                 .ForMember(dest => dest.Manufacturer, act => act.MapFrom(src => src.NewProductManufacturer))
                 .ForMember(dest => dest.EAN_13, act => act.MapFrom(src => src.NewProductEAN_13));
+            CreateMap<ProductEntity, RequestProductModel>();
 
             CreateMap<CreateSubcategoryModel, SubcategoryEntity>()
                 .ForMember(dest => dest.Name, act => act.MapFrom(src => src.NewSubcategoryName))
@@ -42,6 +44,10 @@ namespace IsacGulaker_Uppgift_Dataatkomster
 
             CreateMap<CreateCategoryModel, CategoryEntity>()
                 .ForMember(dest => dest.Name, act => act.MapFrom(src => src.NewCategoryName));
+
+            CreateMap<CreateManufacturerModel, ManufacturerEntity>()
+                .ForMember(dest => dest.Name, act => act.MapFrom(src => src.NewManufacturerName))
+                .ForMember(dest => dest.Address, act => act.MapFrom(src => src.NewManufacturerAddress));
         }
     }
 }

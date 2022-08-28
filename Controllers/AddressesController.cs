@@ -1,6 +1,5 @@
 ﻿using IsacGulaker_Uppgift_Dataatkomster.Models.Address;
 using IsacGulaker_Uppgift_Dataatkomster.Services.Address;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IsacGulaker_Uppgift_Dataatkomster.Controllers

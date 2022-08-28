@@ -1,7 +1,5 @@
-﻿using IsacGulaker_Uppgift_Dataatkomster.Models.Model;
-using IsacGulaker_Uppgift_Dataatkomster.Models.Product;
+﻿using IsacGulaker_Uppgift_Dataatkomster.Models.Product;
 using IsacGulaker_Uppgift_Dataatkomster.Services.Product;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
