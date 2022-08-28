@@ -49,12 +49,32 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Address
 
         public async Task<IEnumerable<RequestAddressModel>> ReadAllAddressesAsync()
         {
-            throw new NotImplementedException();
+            List<AddressEntity> addressEntities = await _context.Addresses.ToListAsync();
+            List<RequestAddressModel> requestAddressModels = new();
+
+            for (int i = 0; i < addressEntities.Count; i++)
+                requestAddressModels.Add(_mapper.Map<RequestAddressModel>(addressEntities[i]));
+
+            return requestAddressModels;
         }
 
         public async Task<IActionResult> UpdateAddressAsync(int id, UpdateAddressModel model)
         {
-            throw new NotImplementedException();
+            AddressEntity addressEntity = await GetAddressAsync(id);
+            if (addressEntity != null)
+            {
+                addressEntity.City = model.NewAddressCity;
+                addressEntity.PostalCode = model.NewAddressPostalCode;
+                addressEntity.StreetName = model.NewAddressStreetName;
+                addressEntity.ResidenceNumber = model.NewAddressResidenceNumber;
+
+                _context.Entry(addressEntity).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return new OkObjectResult("Address has been modified");
+            }
+
+            return new BadRequestObjectResult("Could not find address by given id");
         }
 
         public async Task<IActionResult> DeleteAddressAsync(int id)
@@ -65,13 +85,13 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Address
         public async Task<AddressEntity> GetAddressAsync(int id)
         {
             return await _context.Addresses.FirstOrDefaultAsync(x => x.Id == id);
-        }        
+        }
 
         public async Task<AddressEntity> GetAddressAsync(CreateAddressModel model)
         {
-            return await _context.Addresses.FirstOrDefaultAsync(x => x.City == model.NewAddressCity && 
-                                                                     x.PostalCode == model.NewAddressPostalCode && 
-                                                                     x.StreetName == model.NewAddressStreetName && 
+            return await _context.Addresses.FirstOrDefaultAsync(x => x.City == model.NewAddressCity &&
+                                                                     x.PostalCode == model.NewAddressPostalCode &&
+                                                                     x.StreetName == model.NewAddressStreetName &&
                                                                      x.ResidenceNumber == model.NewAddressResidenceNumber);
         }
     }
