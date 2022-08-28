@@ -25,7 +25,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Data.Entities
         public ManufacturerEntity Manufacturer { get; set; } = null!;
 
         [Required]
-        [Column(TypeName = "nvarchar(13)")]
+        [StringLength(13)]
         public string EAN_13 { get; set; } = null!;
 
         [Required]
