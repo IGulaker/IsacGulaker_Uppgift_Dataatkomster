@@ -9,20 +9,20 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Order
     public class OrderManager : IOrderManager
     {
         private readonly DataContext _context;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
 
         public OrderManager(DataContext context, IMapper mapper)
         {
             _context = context;
-            this.mapper = mapper;
+            this._mapper = mapper;
         }
 
-        public Task<IActionResult> CreateOrderAsync(CreateOrderModel model)
+        public async Task<IActionResult> CreateOrderAsync(CreateOrderModel model)
         {
-            OrderEntity orderEntity = await GetAddressAsync(model);
+            OrderEntity orderEntity = await GetOrderAsync(model);
             if (orderEntity == null)
             {
-                orderEntity = _mapper.Map<AddressEntity>(model);
+                orderEntity = _mapper.Map<OrderEntity>(model);
 
                 await _context.Addresses.AddAsync(orderEntity);
                 await _context.SaveChangesAsync();
@@ -33,32 +33,32 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Order
             return new ConflictObjectResult("Address already exists");
         }
 
-        public Task<IActionResult> ReadOrderAsync(int id)
+        public async Task<IActionResult> ReadOrderAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<RequestOrderModel>> ReadAllOrdersAsync()
+        public async Task<IEnumerable<RequestOrderModel>> ReadAllOrdersAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IActionResult> DeleteOrderAsync(int id)
+        public async Task<IActionResult> DeleteOrderAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OrderEntity> GetOrderAsync(int id)
+        public async Task<OrderEntity> GetOrderAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OrderEntity> GetOrderAsync(CreateOrderModel model)
+        public async Task<OrderEntity> GetOrderAsync(CreateOrderModel model)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IActionResult> UpdateOrderAsync(int id, UpdateOrderModel model)
+        public async Task<IActionResult> UpdateOrderAsync(int id, UpdateOrderModel model)
         {
             throw new NotImplementedException();
         }
