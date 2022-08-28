@@ -49,7 +49,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Product
 
         public async Task<IEnumerable<RequestProductModel>> ReadAllProductsAsync()
         {
-            List<ProductEntity> productEntities = await _context.Products.ToListAsync();
+            List<ProductEntity> productEntities = await _context.Products.Include(x => x.Manufacturer).ThenInclude(x => x.Address).Include(x => x.Subcategory).ThenInclude(x => x.Category).ToListAsync();
             List<RequestProductModel> requestProductModels = new();
 
             for (int i = 0; i < productEntities.Count; i++)
@@ -97,7 +97,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Product
 
         public async Task<ProductEntity> GetProductAsync(int id)
         {
-            return await _context.Products.Include(x => x.Manufacturer).Include(x => x.Subcategory).ThenInclude(x => x.Category).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Products.Include(x => x.Manufacturer).ThenInclude(x => x.Address).Include(x => x.Subcategory).ThenInclude(x => x.Category).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ProductEntity> GetProductAsync(CreateProductModel model)

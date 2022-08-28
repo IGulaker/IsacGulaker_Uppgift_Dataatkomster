@@ -41,13 +41,16 @@ namespace IsacGulaker_Uppgift_Dataatkomster
             CreateMap<CreateSubcategoryModel, SubcategoryEntity>()
                 .ForMember(dest => dest.Name, act => act.MapFrom(src => src.NewSubcategoryName))
                 .ForMember(dest => dest.Category, act => act.MapFrom(src => src.NewSubcategoryCategory));
+            CreateMap<SubcategoryEntity, RequestSubcategoryModel>();
 
             CreateMap<CreateCategoryModel, CategoryEntity>()
                 .ForMember(dest => dest.Name, act => act.MapFrom(src => src.NewCategoryName));
+            CreateMap<CategoryEntity, RequestCategoryModel>();
 
             CreateMap<CreateManufacturerModel, ManufacturerEntity>()
                 .ForMember(dest => dest.Name, act => act.MapFrom(src => src.NewManufacturerName))
                 .ForMember(dest => dest.Address, act => act.MapFrom(src => src.NewManufacturerAddress));
+            CreateMap<ManufacturerEntity, RequestManufacturerModel>();
         }
     }
 }
