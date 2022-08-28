@@ -106,7 +106,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.User
                 return new OkObjectResult($"User {userName} has been removed from the database");
             }
 
-            return new BadRequestObjectResult("Could not find an artist to remove by given id");
+            return new BadRequestObjectResult("Could not find a user to remove by given id");
         }
 
         #endregion

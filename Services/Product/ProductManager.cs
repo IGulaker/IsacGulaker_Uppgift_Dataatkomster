@@ -89,10 +89,10 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Product
 
                 await _context.SaveChangesAsync();
 
-                return new OkObjectResult($"Address on {productName} has been removed from the database");
+                return new OkObjectResult($"Product {productName} has been removed from the database");
             }
 
-            return new BadRequestObjectResult("Could not find an address to remove by given id");
+            return new BadRequestObjectResult("Could not find a product to remove by given id");
         }
 
         public async Task<ProductEntity> GetProductAsync(int id)
