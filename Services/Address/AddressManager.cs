@@ -79,7 +79,20 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.Address
 
         public async Task<IActionResult> DeleteAddressAsync(int id)
         {
-            throw new NotImplementedException();
+            AddressEntity addressEntity = await GetAddressAsync(id);
+            string addressStreetName;
+            if (addressEntity != null)
+            {
+                addressStreetName = addressEntity.StreetName + " " + addressEntity.ResidenceNumber;
+
+                _context.Addresses.Remove(addressEntity);
+
+                await _context.SaveChangesAsync();
+
+                return new OkObjectResult($"Address on {addressStreetName} has been removed from the database");
+            }
+
+            return new BadRequestObjectResult("Could not find an address to remove by given id");
         }
 
         public async Task<AddressEntity> GetAddressAsync(int id)
