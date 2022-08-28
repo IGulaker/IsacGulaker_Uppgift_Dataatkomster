@@ -43,5 +43,12 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Data.Entities
 
         [Required]
         public string OrderStatus { get; set; } = null!;
+
+        public OrderEntity()
+        {
+            OrderDate = DateTime.Now;
+            DueDate = DateTime.Now.AddDays(14);
+            OrderStatus = "Need to be packaged";
+        }
     }
 }
