@@ -8,9 +8,10 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Data
         public virtual DbSet<UserEntity> Users { get; set; } = null!;
         public virtual DbSet<AddressEntity> Addresses { get; set; } = null!;
         public virtual DbSet<ProductEntity> Products { get; set; } = null!;
-        /*public virtual DbSet<CategoryEntity> Categories { get; set; } = null!;
+        public virtual DbSet<CategoryEntity> Categories { get; set; } = null!;
         public virtual DbSet<SubcategoryEntity> Subcategories { get; set; } = null!;
-        public virtual DbSet<OrderEntity> Orders { get; set; } = null!;*/
+        public virtual DbSet<ManufacturerEntity> Manufacturers { get; set; } = null!;
+        public virtual DbSet<OrderEntity> Orders { get; set; } = null!;
 
         public DataContext()
         {
