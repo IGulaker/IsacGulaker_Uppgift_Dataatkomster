@@ -27,7 +27,11 @@ function submitNewUser(e){
         },
         body: SignUpFormJson
     })
-    .then((data) => console.log(data));
+    .then(res => {
+        if(res.status === 200){
+            window.location.replace("index.html");
+        };
+    });
 }
 
 function attemptLogin(e){
@@ -47,9 +51,19 @@ function attemptLogin(e){
         body: signInFormJson
     })
     .then(res => res.text())
-    .then(data => localStorage.setItem('JWT', data))
-    .finally(window.location.replace("ProductsPage.html"));
+    .then(data => {
+        localStorage.setItem('JWT', data);
+        console.log(localStorage.getItem("JWT"));
+        window.location.replace("MainPage.html");
+    });
 }
+
+function getProducts(e){
+    e.preventDefault();
+
+    fetch('')
+}
+
 
 function optionalInputChange(e){
 
