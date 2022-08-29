@@ -120,21 +120,38 @@ function listProducts(data){
 }
 
 function SubmitOrders(e){
+
+
+
     placedOrders.forEach(order => {
-        fetch('https://localhost:7285/api/Orders',{
+        let orderQuantity = 0;
+        placedOrders.forEach(x => {
+            if(x.eaN_13 == order.eaN_13)
+            orderQuantity++;
+            return;
+        });
+
+        let jsonFormatedOrder = JSON.stringify({
+            'productName': order.name,
+            'productEAN_13': order.eaN_13,
+            'productPrice': order.price,
+            'productQuantity': orderQuantity,
+            'customerFirstName': 'Hm',
+            'customerLastName': 'Oj',
+            'city': 'Placebo',
+            'postalCode': '111 22',
+            'streetName': 'justGotta',
+            'residenceNumber': 'getTheUserSomehow'
+        })
+
+        fetch(`https://localhost:7285/api/Orders?key=${localStorage.getItem("apiAccessKey")}`,{
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                
+                'Authorization': `Bearer ${localStorage.getItem("JWT")}`
             },
-            body: signInFormJson
+            body: jsonFormatedOrder
         })
-        .then(res => res.text())
-        .then(data => {
-            localStorage.setItem('JWT', data);
-            console.log(localStorage.getItem("JWT"));
-            window.location.replace("ProductsPage.html");
-        });
     });
 }
 
