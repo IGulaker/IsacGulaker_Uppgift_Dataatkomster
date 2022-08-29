@@ -3,17 +3,18 @@ function submitNewUser(e){
 
     let json = JSON.stringify(
         {
-            firstName: e.target['firstName'].value,
-            lastname: e.target['emailAddress'].value,
-            phoneNumber: e.target['phoneNumber'].value,
-            alternativePhoneNumber: e.target['alternativePhoneNumber'].value,
-            address: {
-                city: e.target['city'],
-                postalCode: e.target['postalCode'],
-                streetName: e.target['streetName'],
-                residenceNumber: e.target['citresidenceNumbery']
+            newUserFirstName: e.target['firstName'].value,
+            newUserLastname: e.target['lastName'].value,
+            newUserEmailAddress: e.target['emailAddress'].value,
+            newUserPhoneNumber: e.target['phoneNumber'].value,
+            newUserAlternativePhoneNumber: e.target['alternativePhoneNumber'].value,
+            newUserAddress: {
+                newAddressCity: e.target['city'].value,
+                newAddressPostalCode: e.target['postalCode'].value,
+                newAddressStreetName: e.target['streetName'].value,
+                newAddressResidenceNumber: e.target['residenceNumber'].value
             },
-            password: e.target['password']
+            newUserPassword: e.target['password'].value
     })
 
     fetch('https://localhost:7285/api/Authentication/SignUp?keY=e2a228d1-95a9-4ade-8eab-5c14f5a24573',{
@@ -24,6 +25,5 @@ function submitNewUser(e){
         body: json
     })
 
-    console.log(e.target['firstName'].value)
-    e.target['firstName'].value = ''
+    console.log(json)
 }
