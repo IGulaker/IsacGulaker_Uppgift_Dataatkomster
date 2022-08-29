@@ -54,16 +54,25 @@ function attemptLogin(e){
     .then(data => {
         localStorage.setItem('JWT', data);
         console.log(localStorage.getItem("JWT"));
-        window.location.replace("MainPage.html");
+        window.location.replace("ProductsPage.html");
     });
 }
 
 function getProducts(e){
     e.preventDefault();
 
-    fetch('')
+    fetch(`https://localhost:7285/api/Products?key=${localStorage.getItem("apiAccessKey")}`,{
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data =>{
+        console.log(data);
+    })
+    
 }
-
 
 function optionalInputChange(e){
 

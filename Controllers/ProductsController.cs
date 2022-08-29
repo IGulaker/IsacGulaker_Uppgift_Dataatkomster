@@ -1,6 +1,7 @@
 ﻿using IsacGulaker_Uppgift_Dataatkomster.Filters;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Product;
 using IsacGulaker_Uppgift_Dataatkomster.Services.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
@@ -19,6 +20,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
 
         [HttpPost]
         [UseAdminApiKey]
+        [Authorize]
         public async Task<IActionResult> PostProductAsync(CreateProductModel model)
         {
             return await _productManager.CreateProductAsync(model);
