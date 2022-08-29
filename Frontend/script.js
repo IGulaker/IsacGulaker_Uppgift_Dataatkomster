@@ -1,6 +1,9 @@
 localStorage.setItem('apiAccessKey', 'e2a228d1-95a9-4ade-8eab-5c14f5a24573');
 localStorage.setItem('apiAdminAccessKey', '76dafbb3-465c-4922-8cf5-19c819362f16');
 
+let products = [];
+let placedOrders = [];
+
 function submitNewUser(e){
     e.preventDefault()
 
@@ -75,14 +78,15 @@ function getProducts(e){
 }
 
 function listProducts(data){
-    
+
     data.forEach(element => {
+        products.push(element);
+
         var li = document.createElement("li");
         li.style.border = "solid 2px"
 
         var p = document.createElement("p");
         p.style.fontSize = "22px";
-        
 
         p.innerHTML = `<br/><center><strong>${element.name}</strong><br/><br/>
                        ${element.description}<br/><br/>
@@ -92,25 +96,20 @@ function listProducts(data){
                        Manufacturer: ${element.manufacturer.name}`;
 
         var btn = document.createElement("button")
+        btn.value = element.eaN_13;
         btn.textContent = "Order";
         btn.classList.add("btn")
         btn.classList.add("btn-primary")
         btn.style.marginLeft = "30px";
         btn.style.marginBottom = "10px";
         btn.style.width = "150px"
+        btn.addEventListener("click", (e) =>{
+            
+        })
 
         li.appendChild(p).appendChild(btn);
         document.querySelector("#listOfProducts").appendChild(li);
     });
-
-    
-
-    //jsonObj = JSON.parse(data);
-    
-    //var list = document.querySelector("listOfProducts");
-    //for (let i of jsonObj) { var item = document.createElement("li"); list.appendChild(item); } 
-
-
 }
 
 function optionalInputChange(e){
