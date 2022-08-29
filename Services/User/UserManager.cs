@@ -116,6 +116,11 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.User
             return await _context.Users.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<UserEntity> GetUserAsync(string email)
+        {
+            return await _context.Users.Include(x => x.Address).FirstOrDefaultAsync(x => x.EmailAddress == email);
+        }
+
         public async Task<UserEntity> GetUserAsync(CreateUserModel model)
         {
             return await _context.Users.Include(x => x.Address).FirstOrDefaultAsync(x => x.EmailAddress == model.NewUserEmailAddress);
@@ -132,9 +137,20 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.User
             }
         }
 
-        public Task<IActionResult> CompareUserPasswordAsync()
+        public bool CompareUserPassword(UserEntity userEntity, string password)
         {
-            throw new NotImplementedException();
+            using (var hmac = new HMACSHA512(userEntity.PasswordSalt))
+            {
+                var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    if (hash[i] != userEntity.PasswordHash[i])
+                        return false;
+                }
+
+                return true;
+            }
         }
 
         #endregion

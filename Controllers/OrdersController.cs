@@ -1,6 +1,7 @@
 ﻿using IsacGulaker_Uppgift_Dataatkomster.Filters;
 using IsacGulaker_Uppgift_Dataatkomster.Models.Order;
 using IsacGulaker_Uppgift_Dataatkomster.Services.Order;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [UseApiKey]
+    [Authorize]
     public class OrdersController : ControllerBase
     {
         private readonly IOrderManager _orderManager;

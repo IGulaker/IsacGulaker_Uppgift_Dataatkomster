@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
     <PackageReference Include="microsoft.aspnetcore.mvc.newtonsoftjson" Version="6.0.8" />
     <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="6.0.8" />
     <PackageReference Include="microsoft.entityframeworkcore.tools" Version="6.0.8">

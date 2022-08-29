@@ -12,9 +12,11 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Services.User
         public Task<IActionResult> UpdateUserAsync(int id, UpdateUserModel model);
         public Task<IActionResult> DeleteUserAsync(int id);
 
-        public void CreateUserPassword(UserEntity userEntity, string newPassword);
-        public Task<IActionResult> CompareUserPasswordAsync();
-
         public Task<UserEntity> GetUserAsync(int id);
+        public Task<UserEntity> GetUserAsync(string email);
+        public Task<UserEntity> GetUserAsync(CreateUserModel model);
+
+        public void CreateUserPassword(UserEntity userEntity, string newPassword);
+        public bool CompareUserPassword(UserEntity userEntity, string password);
     }
 }

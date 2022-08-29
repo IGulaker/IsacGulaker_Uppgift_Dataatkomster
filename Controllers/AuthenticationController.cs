@@ -5,6 +5,10 @@ using IsacGulaker_Uppgift_Dataatkomster.Models.User;
 using IsacGulaker_Uppgift_Dataatkomster.Services.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
 {
@@ -29,17 +33,17 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
             return result as OkObjectResult == null ? result : result as OkObjectResult;
         }
 
-        /*[HttpPost("SignIn")]
+        [HttpPost("SignIn")]
         public async Task<IActionResult> SignIn(SignInForm form)
         {
             if (string.IsNullOrEmpty(form.Email) | string.IsNullOrEmpty(form.Password))
                 return new BadRequestObjectResult("Email and password must be provided");
 
-            var userEntity = await _context.Users.FirstOrDefaultAsync(x => x.Email == form.Email);
+            var userEntity = await _userManager.GetUserAsync(form.Email);
             if (userEntity == null)
                 return new BadRequestObjectResult("Incorrect email or password");
 
-            if (!userEntity.CompareSecurePassword(form.Password))
+            if (!_userManager.CompareUserPassword(userEntity, form.Password))
                 return new BadRequestObjectResult("Incorrect email or password");
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -47,20 +51,20 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, userEntity.Email),
-                    new Claim(ClaimTypes.Email, userEntity.Email),
+                    new Claim(ClaimTypes.Name, userEntity.EmailAddress),
+                    new Claim(ClaimTypes.Email, userEntity.EmailAddress),
                     new Claim("UserId", userEntity.Id.ToString()),
-                    new Claim("ApiKey", _configuration.GetValue<string>("ApiKey"))
+                    new Claim("ApiAccessKey", _configuration.GetValue<string>("ApiKeys:ApiAccessKey"))
                 }),
 
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("SecretKey"))),
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("ApiKeys:JWTKey"))),
                     SecurityAlgorithms.HmacSha512Signature)
             };
 
             var accessToken = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
             return new OkObjectResult(accessToken);
-        }*/
+        }
     }
 }
