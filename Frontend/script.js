@@ -17,13 +17,15 @@ function submitNewUser(e){
             newUserPassword: e.target['password'].value
     });
 
-    fetch('https://localhost:7285/api/Authentication/SignUp?keY=e2a228d1-95a9-4ade-8eab-5c14f5a24573',{
+    let fetchResponse = fetch('https://localhost:7285/api/Authentication/SignUp?keY=e2a228d1-95a9-4ade-8eab-5c14f5a24573',{
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
         body: SignUpFormJson
-    });
+    })
+    .then((data) => console.log(data));
+
 }
 
 function attemptLogin(e){
@@ -40,9 +42,9 @@ function attemptLogin(e){
         headers: {
             'Content-Type': 'application/json'
         },
-
         body: signInFormJson
-    });
+    })
+    .then((data) => console.log(data));
 }
 
 function optionalInputChange(e){
