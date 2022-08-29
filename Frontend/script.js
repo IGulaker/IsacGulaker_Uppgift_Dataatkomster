@@ -81,7 +81,7 @@ function listProducts(data){
         li.style.border = "solid 2px"
 
         var p = document.createElement("p");
-        p.style.fontSize = "16px";
+        p.style.fontSize = "22px";
         
 
         p.innerHTML = `<br/><center><strong>${element.name}</strong><br/><br/>
@@ -91,7 +91,15 @@ function listProducts(data){
                        ${element.subcategory.name} ${element.subcategory.category.name}<br/><br/>
                        Manufacturer: ${element.manufacturer.name}`;
 
-        li.appendChild(p);
+        var btn = document.createElement("button")
+        btn.textContent = "Order";
+        btn.classList.add("btn")
+        btn.classList.add("btn-primary")
+        btn.style.marginLeft = "30px";
+        btn.style.marginBottom = "10px";
+        btn.style.width = "150px"
+
+        li.appendChild(p).appendChild(btn);
         document.querySelector("#listOfProducts").appendChild(li);
     });
 
