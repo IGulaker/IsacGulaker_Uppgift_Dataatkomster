@@ -1,4 +1,5 @@
-﻿using IsacGulaker_Uppgift_Dataatkomster.Models.Product;
+﻿using IsacGulaker_Uppgift_Dataatkomster.Filters;
+using IsacGulaker_Uppgift_Dataatkomster.Models.Product;
 using IsacGulaker_Uppgift_Dataatkomster.Services.Product;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [UseApiKey]
     public class ProductsController : ControllerBase
     {
         private readonly IProductManager _productManager;

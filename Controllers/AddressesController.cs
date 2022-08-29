@@ -1,4 +1,5 @@
-﻿using IsacGulaker_Uppgift_Dataatkomster.Models.Address;
+﻿using IsacGulaker_Uppgift_Dataatkomster.Filters;
+using IsacGulaker_Uppgift_Dataatkomster.Models.Address;
 using IsacGulaker_Uppgift_Dataatkomster.Services.Address;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +7,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [UseApiKey]
     public class AddressesController : ControllerBase
     {
         private readonly IAddressManager _addressManager;
