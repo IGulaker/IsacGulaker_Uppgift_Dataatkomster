@@ -44,7 +44,10 @@ function attemptLogin(e){
         },
         body: signInFormJson
     })
-    .then((data) => console.log(data));
+    .then(data =>{
+        if(data.status == 200)
+        window.location.replace("ProductsPage.html");
+    });
 }
 
 function optionalInputChange(e){
