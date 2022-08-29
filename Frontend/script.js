@@ -69,9 +69,21 @@ function getProducts(e){
     })
     .then(res => res.json())
     .then(data =>{
-        console.log(data);
+        listProducts(data)
     })
     
+}
+
+function listProducts(data){
+    
+    d
+
+    //jsonObj = JSON.parse(data);
+    
+    //var list = document.querySelector("listOfProducts");
+    //for (let i of jsonObj) { var item = document.createElement("li"); list.appendChild(item); } 
+
+
 }
 
 function optionalInputChange(e){
