@@ -36,12 +36,14 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [UseAdminApiKey]
         public async Task<IActionResult> PutAddressAsync(int id, UpdateAddressModel model)
         {
             return await _addressManager.UpdateAddressAsync(id, model);
         }
 
         [HttpDelete("{id:int}")]
+        [UseAdminApiKey]
         public async Task<IActionResult> DeleteAddressAsync(int id)
         {
             return await _addressManager.DeleteAddressAsync(id);

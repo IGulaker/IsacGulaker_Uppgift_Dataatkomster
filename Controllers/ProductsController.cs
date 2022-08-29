@@ -18,6 +18,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
         }
 
         [HttpPost]
+        [UseAdminApiKey]
         public async Task<IActionResult> PostProductAsync(CreateProductModel model)
         {
             return await _productManager.CreateProductAsync(model);
@@ -36,12 +37,14 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [UseAdminApiKey]
         public async Task<IActionResult> PutProductAsync(int id, UpdateProductModel model)
         {
             return await _productManager.UpdateProductAsync(id, model);
         }
 
         [HttpDelete("{id:int}")]
+        [UseAdminApiKey]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {
             return await _productManager.DeleteProductAsync(id);
