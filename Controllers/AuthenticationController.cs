@@ -14,7 +14,6 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [UseApiKey]
     public class AuthenticationController : ControllerBase
     {
         private readonly IUserManager _userManager;

@@ -1,3 +1,6 @@
+localStorage.setItem('apiAccessKey', 'e2a228d1-95a9-4ade-8eab-5c14f5a24573');
+localStorage.setItem('apiAdminAccessKey', '76dafbb3-465c-4922-8cf5-19c819362f16');
+
 function submitNewUser(e){
     e.preventDefault()
 
@@ -17,7 +20,7 @@ function submitNewUser(e){
             newUserPassword: e.target['password'].value
     });
 
-    let fetchResponse = fetch('https://localhost:7285/api/Authentication/SignUp?keY=e2a228d1-95a9-4ade-8eab-5c14f5a24573',{
+    fetch('https://localhost:7285/api/Authentication/SignUp',{
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -25,7 +28,6 @@ function submitNewUser(e){
         body: SignUpFormJson
     })
     .then((data) => console.log(data));
-
 }
 
 function attemptLogin(e){
@@ -37,17 +39,16 @@ function attemptLogin(e){
             password: e.target['password'].value
     });
 
-    fetch('https://localhost:7285/api/Authentication/SignIn?keY=e2a228d1-95a9-4ade-8eab-5c14f5a24573',{
+    fetch('https://localhost:7285/api/Authentication/SignIn',{
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
         body: signInFormJson
     })
-    .then(data =>{
-        if(data.status == 200)
-        window.location.replace("ProductsPage.html");
-    });
+    .then(res => res.text())
+    .then(data => localStorage.setItem('JWT', data))
+    .finally(window.location.replace("ProductsPage.html"));
 }
 
 function optionalInputChange(e){
