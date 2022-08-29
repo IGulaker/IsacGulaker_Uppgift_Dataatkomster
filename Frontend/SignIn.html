@@ -11,36 +11,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>Create new user profile</h1>
-        <form onsubmit="submitNewUser(event)">
+        <h1>Log In</h1>
+        <form onsubmit="attemptLogin(event)">
             <div class="mb-3">
                 <br/>
-                <h2>User Information:</h2>
-                <br/>
-                <label>First Name</label>
-                <input id="firstName" type="text" class="form-control">
-                <label>Last Name</label>
-                <input id="lastName" type="text" class="form-control">
                 <label>Email Address</label>
-                <input id="emailAddress" type="text" class="form-control">
-                <label>Phone Number</label>
-                <input id="phoneNumber" type="text" class="form-control" placeholder="*Optional">
-                <label>Alternative Phone Number</label>
-                <input id="alternativePhoneNumber" type="text" class="form-control" placeholder="*Optional">
-                <br/>
-                <h2>Address:</h2>
-                <br/>
-                <label>City</label>
-                <input id="city" type="text" class="form-control">
-                <label>Postal Code</label>
-                <input id="postalCode" type="text" class="form-control">
-                <label>Street Name</label>
-                <input id="streetName" type="text" class="form-control">
-                <label>ResidenceNumber</label>
-                <input id="residenceNumber" type="text" class="form-control">
+                <input id="emailAddress" type="text" class="form-control" placeholder="example@domain.com">
                 <br/>
                 <label>Password</label>
-                <input id="password" type="password" class="form-control">
+                <input id="password" type="password" class="form-control" placeholder="********">
                 <br/>
                 <button type="submit" class="btn btn-primary">Skicka</button>
             </div>
