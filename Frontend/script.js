@@ -103,9 +103,14 @@ function listProducts(data){
         btn.style.marginLeft = "30px";
         btn.style.marginBottom = "10px";
         btn.style.width = "150px"
+
         btn.addEventListener("click", (e) =>{
-            
-        })
+            products.forEach(product =>{
+                if(product.eaN_13 == e.target.value){
+                    placedOrders.push(product);
+                }
+            });
+        });
 
         li.appendChild(p).appendChild(btn);
         document.querySelector("#listOfProducts").appendChild(li);
