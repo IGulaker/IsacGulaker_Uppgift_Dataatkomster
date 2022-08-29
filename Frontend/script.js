@@ -110,10 +110,31 @@ function listProducts(data){
                     placedOrders.push(product);
                 }
             });
+
+            document.querySelector("#checkout").textContent = "Placed Orders: " + placedOrders.length;
         });
 
         li.appendChild(p).appendChild(btn);
         document.querySelector("#listOfProducts").appendChild(li);
+    });
+}
+
+function SubmitOrders(e){
+    placedOrders.forEach(order => {
+        fetch('https://localhost:7285/api/Orders',{
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                
+            },
+            body: signInFormJson
+        })
+        .then(res => res.text())
+        .then(data => {
+            localStorage.setItem('JWT', data);
+            console.log(localStorage.getItem("JWT"));
+            window.location.replace("ProductsPage.html");
+        });
     });
 }
 
