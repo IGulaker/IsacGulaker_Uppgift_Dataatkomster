@@ -76,7 +76,26 @@ function getProducts(e){
 
 function listProducts(data){
     
-    d
+    data.forEach(element => {
+        var li = document.createElement("li");
+        li.style.border = "solid 2px"
+
+        var p = document.createElement("p");
+        p.style.fontSize = "16px";
+        
+
+        p.innerHTML = `<br/><center><strong>${element.name}</strong><br/><br/>
+                       ${element.description}<br/><br/>
+                       Price: ${element.price}<br/>
+                       Article number: ${element.eaN_13}<br/>
+                       ${element.subcategory.name} ${element.subcategory.category.name}<br/><br/>
+                       Manufacturer: ${element.manufacturer.name}`;
+
+        li.appendChild(p);
+        document.querySelector("#listOfProducts").appendChild(li);
+    });
+
+    
 
     //jsonObj = JSON.parse(data);
     

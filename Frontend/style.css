@@ -13,8 +13,13 @@
     font-family: sans-serif;
   }
 
+  li{
+    margin: 20px;
+  }
+
   h1{
     text-align: center;
+    margin: 50px;
   }
 
   a{
