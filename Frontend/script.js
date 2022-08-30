@@ -53,16 +53,16 @@ function attemptLogin(e){
         },
         body: signInFormJson
     })
-    .then(res => res.text())
-    .then(data => {
-        localStorage.setItem('JWT', data);
-        console.log(localStorage.getItem("JWT"));
+    .then(res => res.json())
+    .then(customerProfile => {
+        sessionStorage.setItem("CustomerProfile", JSON.stringify(customerProfile));
+        let jsonProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
+        console.log('Current User: ' + jsonProfile.firstName + ' ' + jsonProfile.lastName);
         window.location.replace("ProductsPage.html");
     });
 }
 
 function getProducts(e){
-    e.preventDefault();
 
     fetch(`https://localhost:7285/api/Products?key=${localStorage.getItem("apiAccessKey")}`,{
         method: 'get',
@@ -78,7 +78,6 @@ function getProducts(e){
 }
 
 function listProducts(data){
-
     data.forEach(element => {
         products.push(element);
 
@@ -123,6 +122,8 @@ function SubmitOrders(e){
 
 
 
+
+
     placedOrders.forEach(order => {
         let orderQuantity = 0;
         placedOrders.forEach(x => {
@@ -148,7 +149,7 @@ function SubmitOrders(e){
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem("JWT")}`
+                'Authorization': `Bearer ${sessionStorage.getItem("JWT")}`
             },
             body: jsonFormatedOrder
         })

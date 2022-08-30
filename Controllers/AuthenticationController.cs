@@ -45,6 +45,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
             if (!_userManager.CompareUserPassword(userEntity, form.Password))
                 return new BadRequestObjectResult("Incorrect email or password");
 
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -63,7 +64,16 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Controllers
             };
 
             var accessToken = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
-            return new OkObjectResult(accessToken);
+
+            CustomerSessionProfile customerSessionProfile = new()
+            {
+                FirstName = userEntity.FirstName,
+                LastName = userEntity.LastName,
+                Address = userEntity.Address,
+                AccessToken = accessToken
+            };
+
+            return new OkObjectResult(customerSessionProfile);
         }
     }
 }
