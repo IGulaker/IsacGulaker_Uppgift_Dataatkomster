@@ -33,6 +33,9 @@ function submitNewUser(e){
     .then(res => {
         if(res.status === 200){
             window.location.replace("index.html");
+        }
+        else{
+            document.querySelector("#submitErrorLabel").innerHTML = 'Something went wrong';
         };
     });
 }
