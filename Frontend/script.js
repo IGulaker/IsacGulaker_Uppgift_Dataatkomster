@@ -174,9 +174,9 @@ function SubmitOrders(e){
         })
     });
 
-    placedOrders = [];
     document.querySelector("#checkout").textContent = "Placed Orders: 0";
-    document.querySelector("#confirmedOrders").textContent = "Vi har tagit emot dina ordrar";
+    document.querySelector("#confirmedOrders").textContent = `We have received your ${placedOrders.length} orders`;
+    placedOrders = [];
 }
 
 function optionalInputChange(e){
