@@ -133,7 +133,6 @@ function SubmitOrders(e){
         });
 
         customerProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
-        console.log(customerProfile);
 
         let jsonFormatedOrder = JSON.stringify({
             'productName': order.name,
