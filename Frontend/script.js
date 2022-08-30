@@ -40,7 +40,7 @@ function submitNewUser(e){
 function attemptLogin(e){
     e.preventDefault();
 
-    let signInFormJson = JSON.stringify(
+    let signInFormJsonString = JSON.stringify(
         {
             email: e.target['emailAddress'].value,
             password: e.target['password'].value
@@ -51,12 +51,12 @@ function attemptLogin(e){
         headers: {
             'Content-Type': 'application/json'
         },
-        body: signInFormJson
+        body: signInFormJsonString
     })
     .then(res => res.json())
-    .then(customerProfile => {
-        sessionStorage.setItem("CustomerProfile", JSON.stringify(customerProfile));
-        let jsonProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
+    .then(customerSessionProfile => {
+        sessionStorage.setItem("CustomerSessionProfile", JSON.stringify(customerSessionProfile));
+        let jsonProfile = JSON.parse(sessionStorage.getItem("CustomerSessionProfile"));
         console.log('Current User: ' + jsonProfile.firstName + ' ' + jsonProfile.lastName);
         window.location.replace("ProductsPage.html");
     });
@@ -119,43 +119,64 @@ function listProducts(data){
 }
 
 function SubmitOrders(e){
-
-
-
-
+    customerSessionProfile = JSON.parse(sessionStorage.getItem("CustomerSessionProfile"));
+    let sortedOrders = [];
 
     placedOrders.forEach(order => {
-        let orderQuantity = 0;
-        placedOrders.forEach(x => {
-            if(x.eaN_13 == order.eaN_13)
-            orderQuantity++;
-            return;
-        });
+        order.customerFirstName = customerSessionProfile.firstName;
+        order.customerLastName = customerSessionProfile.lastName;
+        order.city = customerSessionProfile.address.city;
+        order.postalCode = customerSessionProfile.address.postalCode;
+        order.streetName = customerSessionProfile.address.streetName;
+        order.residenceNumber = customerSessionProfile.address.residenceNumber;
 
-        customerProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
+        if(sortedOrders.length === 0){
+            order.productQuantity = 1;
+            sortedOrders.push(order);
+        }
+        else{
+            let isOrderSorted = false;
+            sortedOrders.forEach(product =>{
+                if(product.eaN_13 === order.eaN_13){
+                    isOrderSorted = true;
+                    product.productQuantity++;
+                }
+            });
+            if(isOrderSorted == false){
+                order.productQuantity = 1;
+                sortedOrders.push(order);
+            }
+        }
+    });
 
-        let jsonFormatedOrder = JSON.stringify({
-            'productName': order.name,
-            'productEAN_13': order.eaN_13,
-            'productPrice': order.price,
-            'productQuantity': orderQuantity,
-            'customerFirstName': `${customerProfile.firstName}`,
-            'customerLastName': `${customerProfile.lastName}`,
-            'city': `${customerProfile.address.city}`,
-            'postalCode': `${customerProfile.address.postalCode}`,
-            'streetName': `${customerProfile.address.streetName}`,
-            'residenceNumber': `${customerProfile.address.residenceNumber}`
+    sortedOrders.forEach(sortedOrder => {
+        console.log(sortedOrder);
+        let sortedOrderJsonString = JSON.stringify({
+            'productName': sortedOrder.name,
+            'productEAN_13': sortedOrder.eaN_13,
+            'productPrice': sortedOrder.price,
+            'productQuantity': sortedOrder.productQuantity,
+            'customerFirstName': sortedOrder.customerFirstName,
+            'customerLastName': sortedOrder.customerLastName,
+            'city': sortedOrder.city,
+            'postalCode': sortedOrder.postalCode,
+            'streetName': sortedOrder.streetName,
+            'residenceNumber': sortedOrder.residenceNumber
         })
 
         fetch(`https://localhost:7285/api/Orders?key=${localStorage.getItem("apiAccessKey")}`,{
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem("CustomerProfile")).accessToken}`
+                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem("CustomerSessionProfile")).accessToken}`
             },
-            body: jsonFormatedOrder
+            body: sortedOrderJsonString
         })
     });
+
+    placedOrders = [];
+    document.querySelector("#checkout").textContent = "Placed Orders: 0";
+    document.querySelector("#confirmedOrders").textContent = "Vi har tagit emot dina ordrar";
 }
 
 function optionalInputChange(e){

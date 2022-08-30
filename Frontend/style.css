@@ -17,6 +17,11 @@
     margin: 20px;
   }
 
+  #confirmedOrders{
+    font-size: large;
+    color: green;
+  }
+
   h1{
     text-align: center;
     margin: 50px;

@@ -1,4 +1,4 @@
-﻿using IsacGulaker_Uppgift_Dataatkomster.Models.Address;
+﻿using IsacGulaker_Uppgift_Dataatkomster.Data.Entities;
 
 namespace IsacGulaker_Uppgift_Dataatkomster
 {
@@ -6,7 +6,7 @@ namespace IsacGulaker_Uppgift_Dataatkomster
     {
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
-        public RequestAddressModel Address { get; set; } = null!;
+        public AddressEntity Address { get; set; } = null!;
         public string AccessToken { get; set; } = null!;
     }
 }
