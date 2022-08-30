@@ -31,12 +31,21 @@ function submitNewUser(e){
         body: SignUpFormJson
     })
     .then(res => {
-        if(res.status === 200){
-            window.location.replace("index.html");
+        let errorLabel = document.querySelector("#submitErrorLabel");
+
+        switch(res.status){
+            case 200:
+                window.location.replace("index.html");
+                break;
+            case 400:
+                errorLabel.innerHTML = 'Some information has not been input correctly';
+                break;
+            case 409:
+                errorLabel.innerHTML = 'User with that email address is already registred';
+                break;
+            default:
+                errorLabel.innerHTML = 'Something went wrong';
         }
-        else{
-            document.querySelector("#submitErrorLabel").innerHTML = 'Something went wrong';
-        };
     });
 }
 
