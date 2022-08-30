@@ -66,7 +66,6 @@ function attemptLogin(e){
         body: signInFormJsonString
     })
     .then(res => res.json())
-    .catch(document.querySelector("#signInErrorLabel").innerHTML = "Incorrect email or password")
     .then(customerSessionProfile => {
         console.log(customerSessionProfile);
 
