@@ -151,7 +151,7 @@ function SubmitOrders(e){
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${sessionStorage.getItem("JWT")}`
+                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem("CustomerProfile")).accessToken}`
             },
             body: jsonFormatedOrder
         })
