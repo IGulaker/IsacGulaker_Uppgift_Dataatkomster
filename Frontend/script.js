@@ -66,11 +66,16 @@ function attemptLogin(e){
         body: signInFormJsonString
     })
     .then(res => res.json())
+    .catch(document.querySelector("#signInErrorLabel").innerHTML = "Incorrect email or password")
     .then(customerSessionProfile => {
-        sessionStorage.setItem("CustomerSessionProfile", JSON.stringify(customerSessionProfile));
-        let jsonProfile = JSON.parse(sessionStorage.getItem("CustomerSessionProfile"));
-        console.log('Current User: ' + jsonProfile.firstName + ' ' + jsonProfile.lastName);
-        window.location.replace("ProductsPage.html");
+        console.log(customerSessionProfile);
+
+        if(customerSessionProfile != undefined){
+            sessionStorage.setItem("CustomerSessionProfile", JSON.stringify(customerSessionProfile));
+            let jsonProfile = JSON.parse(sessionStorage.getItem("CustomerSessionProfile"));
+            console.log('Current User: ' + jsonProfile.firstName + ' ' + jsonProfile.lastName);
+            window.location.replace("ProductsPage.html");
+        }
     });
 }
 
