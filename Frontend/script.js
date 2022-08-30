@@ -133,6 +133,7 @@ function SubmitOrders(e){
         });
 
         customerProfile = JSON.parse(sessionStorage.getItem("CustomerProfile"));
+        console.log(customerProfile);
 
         let jsonFormatedOrder = JSON.stringify({
             'productName': order.name,
@@ -141,10 +142,10 @@ function SubmitOrders(e){
             'productQuantity': orderQuantity,
             'customerFirstName': `${customerProfile.firstName}`,
             'customerLastName': `${customerProfile.lastName}`,
-            'city': `${customerProfile.city}`,
-            'postalCode': `${customerProfile.postalCode}`,
-            'streetName': `${customerProfile.streetName}`,
-            'residenceNumber': `${customerProfile.residenceNumber}`
+            'city': `${customerProfile.address.city}`,
+            'postalCode': `${customerProfile.address.postalCode}`,
+            'streetName': `${customerProfile.address.streetName}`,
+            'residenceNumber': `${customerProfile.address.residenceNumber}`
         })
 
         fetch(`https://localhost:7285/api/Orders?key=${localStorage.getItem("apiAccessKey")}`,{
