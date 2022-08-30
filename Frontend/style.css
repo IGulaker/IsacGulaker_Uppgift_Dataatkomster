@@ -18,9 +18,14 @@
   }
 
   #confirmedOrders{
-    font-size: large;
+    font-size: small;
     color: green;
   }
+
+  #checkout{
+    font-size: large;
+  }
+
 
   h1{
     text-align: center;
