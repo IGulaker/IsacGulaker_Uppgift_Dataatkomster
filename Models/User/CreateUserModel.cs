@@ -22,6 +22,8 @@ namespace IsacGulaker_Uppgift_Dataatkomster.Models.User
         [RegularExpression("^[0-9]*$", ErrorMessage = "Incorrect format on alternitive phone number (Only digits allowed)")]
         public string? NewUserAlternativePhoneNumber { get; set; }
         public CreateAddressModel NewUserAddress { get; set; } = null!;
+
+        [StringLength(200, MinimumLength = 6, ErrorMessage = "Incorrect length on password (Minimum 6 characters, maximum 200 characters)")]
         public string NewUserPassword { get; set; } = null!;
     }
 }
